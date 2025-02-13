@@ -26,11 +26,7 @@ const App = () => {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route
                   path="/invoice-details"
-                  element={
-                    <h1>
-                      Invoice <Details></Details>
-                    </h1>
-                  }
+                  element={<h1>Invoice details</h1>}
                 />
                 <Route path="/comments" element={<h1>Comments</h1>} />
               </Route>
