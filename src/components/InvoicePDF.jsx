@@ -1,7 +1,6 @@
 import React from "react";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 
-// Define styles
 const styles = StyleSheet.create({
   page: { padding: 30, fontSize: 12 },
   section: { marginBottom: 10 },
@@ -19,8 +18,7 @@ const styles = StyleSheet.create({
   },
 });
 
-// Dummy Invoice PDF Component
-const DummyInvoicePDF = ({ data }) => {
+const InvoicePDF = ({ data }) => {
   if (!data) return null;
   return (
     <Document>
@@ -84,4 +82,4 @@ const DummyInvoicePDF = ({ data }) => {
   );
 };
 
-export default DummyInvoicePDF;
+export default InvoicePDF;

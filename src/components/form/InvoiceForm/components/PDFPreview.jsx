@@ -41,7 +41,7 @@ export const PDFPreview = ({ pdfFile, onFileUpload }) => {
           </p>
           <img
             alt="Illustration of uploading an invoice"
-            className="my-4 w-2/3 bg-white"
+            className="my-4 w-2/5 bg-white"
             height="100"
             src="https://www.tcieduhub.in/public/photos/docs20.gif"
           />

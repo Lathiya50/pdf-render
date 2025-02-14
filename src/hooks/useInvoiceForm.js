@@ -6,7 +6,7 @@ import { usePDFHandling } from "./usePDFHandling";
 import { INITIAL_VALUES } from "../components/form/InvoiceForm/constant";
 import { validationSchema } from "../components/form/InvoiceForm/validation";
 import { savePDFToLocalStorage } from "../lib/function";
-import DummyInvoicePDF from "../components/DummyInvoicePDF";
+import InvoicePDF from "../components/InvoicePDF";
 import { pdf } from "@react-pdf/renderer";
 
 export const useInvoiceForm = () => {
@@ -42,29 +42,11 @@ export const useInvoiceForm = () => {
     [handlePDFUpload]
   );
 
-  const handleAddExpenseCode = useCallback(() => {
-    const newExpenseCodes = [
-      ...formik.values.expenseCodes,
-      INITIAL_VALUES.expenseCodes[0],
-    ];
-    formik.setFieldValue("expenseCodes", newExpenseCodes);
-  }, [formik]);
-
-  const handleRemoveExpenseCode = useCallback(
-    (index) => {
-      const newExpenseCodes = formik.values.expenseCodes.filter(
-        (_, i) => i !== index
-      );
-      formik.setFieldValue("expenseCodes", newExpenseCodes);
-    },
-    [formik]
-  );
-
   const populateDummyData = useCallback(
     async (data) => {
       if (!data) return;
       try {
-        const element = React.createElement(DummyInvoicePDF, { data });
+        const element = React.createElement(InvoicePDF, { data });
 
         const dummyPDFBlob = await pdf(element).toBlob();
         await savePDFToLocalStorage(dummyPDFBlob);
@@ -85,8 +67,6 @@ export const useInvoiceForm = () => {
     pdfFile,
     setPdfFile,
     handleFileUpload,
-    handleAddExpenseCode,
-    handleRemoveExpenseCode,
     populateDummyData,
   };
 };

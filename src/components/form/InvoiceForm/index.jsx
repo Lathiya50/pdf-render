@@ -9,15 +9,8 @@ import { useInvoiceForm } from "../../../hooks/useInvoiceForm";
 import { loadPDFFromLocalStorage } from "../../../lib/function";
 
 const InvoiceForm = () => {
-  const {
-    formik,
-    pdfFile,
-    setPdfFile,
-    handleFileUpload,
-    handleAddExpenseCode,
-    handleRemoveExpenseCode,
-    populateDummyData,
-  } = useInvoiceForm();
+  const { formik, pdfFile, setPdfFile, handleFileUpload, populateDummyData } =
+    useInvoiceForm();
 
   useEffect(() => {
     const loadSavedPDF = async () => {
@@ -41,11 +34,7 @@ const InvoiceForm = () => {
         >
           <VendorSection formik={formik} />
           <InvoiceDetailsSection formik={formik} />
-          <ExpenseSection
-            formik={formik}
-            onAddExpense={handleAddExpenseCode}
-            onRemoveExpense={handleRemoveExpenseCode}
-          />
+          <ExpenseSection formik={formik} />
           <CommentsSection formik={formik} />
           <ActionButtons formik={formik} onPopulateDummy={populateDummyData} />
         </form>

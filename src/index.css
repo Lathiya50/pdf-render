@@ -54,7 +54,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: none;
 }
 
 @media (prefers-color-scheme: light) {
@@ -69,8 +69,6 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
-
 @layer components {
   .form-label {
     @apply block text-sm text-gray-700 font-medium;
@@ -95,7 +93,7 @@ button:focus-visible {
   }
 
   .btn-primary {
-    @apply !bg-blue-500 !text-white border-0 hover:bg-blue-600 border-0 !ring-offset-0 !ring-0;
+    @apply !bg-blue-500 !text-white border-0 hover:bg-blue-600 !ring-offset-0 !ring-0;
   }
 
   .btn-secondary {
@@ -104,5 +102,9 @@ button:focus-visible {
 
   .btn-outline {
     @apply !bg-white !text-gray-700 border-0 hover:bg-gray-50 outline-0  !ring-offset-0 !ring-0;
+  }
+
+  .btn:hover {
+    @apply shadow-lg bg-blue-600;
   }
 }

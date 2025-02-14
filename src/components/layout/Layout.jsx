@@ -1,4 +1,3 @@
-// src/components/layout/Layout.jsx
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 
@@ -10,7 +9,8 @@ const Layout = () => {
         <Outlet />
       </main>
     </div>
-  );x
+  );
+  x;
 };
 
 export default Layout;

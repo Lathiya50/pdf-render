@@ -1,9 +1,12 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../contexts/AuthContext";
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 
 const LoginForm = () => {
   const { login } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
 
   const validationSchema = Yup.object({
     username: Yup.string()
@@ -31,9 +34,10 @@ const LoginForm = () => {
     validationSchema,
     onSubmit: (values) => {
       try {
+        //  display loading state for 1 second
         setTimeout(() => {
           login(values);
-        }, 2000);
+        }, 1000);
       } catch (error) {
         console.error("Login failed:", error);
       } finally {
@@ -41,18 +45,19 @@ const LoginForm = () => {
       }
     },
   });
+
   const getInputClassName = (fieldName) => `
-    w-full px-4 py-3 md:py-3.5 text-base text-gray-800 
-    border-2 rounded-xl transition-all duration-200
-    ${
-      formik.touched[fieldName] && formik.errors[fieldName]
-        ? "border-red-500 focus:border-red-500 focus:ring-red-200"
-        : formik.touched[fieldName] && !formik.errors[fieldName]
-        ? "border-green-500 focus:border-green-500 focus:ring-green-200"
-        : "border-gray-200 focus:border-blue-500 focus:ring-blue-200"
-    }
-    focus:ring-2
-  `;
+  w-full px-4 py-2 md:py-2.5 text-base text-gray-800 
+  border rounded-xl transition-all duration-200
+  ${
+    formik.touched[fieldName] && formik.errors[fieldName]
+      ? "border-red-500 focus:border-red-500 focus:ring-red-200"
+      : formik.touched[fieldName] && !formik.errors[fieldName]
+      ? "border-green-500 focus:border-green-500 focus:ring-green-200"
+      : "border-gray-200 focus:border-blue-500 focus:ring-blue-200"
+  }
+  focus:ring-2 focus:outline-none
+`;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 md:p-6 lg:p-8">
@@ -68,7 +73,7 @@ const LoginForm = () => {
         </div>
 
         {/* Form Section */}
-        <form onSubmit={formik.handleSubmit} className="flex flex-col gap-6">
+        <form onSubmit={formik.handleSubmit} className="flex flex-col gap-5">
           {/* Input Fields Container */}
           <div className="flex flex-col gap-4">
             {/* Username Field */}
@@ -96,7 +101,6 @@ const LoginForm = () => {
                 )}
               </div>
             </div>
-
             {/* Password Field */}
             <div className="flex flex-col gap-1.5">
               <label
@@ -106,15 +110,27 @@ const LoginForm = () => {
                 Password
               </label>
               <div className="flex flex-col gap-1">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  {...formik.getFieldProps("password")}
-                  className={getInputClassName("password")}
-                  placeholder="Enter your password"
-                  autoComplete="current-password"
-                />
+                <div className="relative">
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    {...formik.getFieldProps("password")}
+                    className={getInputClassName("password")}
+                    placeholder="Enter your password"
+                    autoComplete="current-password"
+                  />
+                  <div
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                  >
+                    {showPassword ? (
+                      <EyeOff size={20} className="stroke-current" />
+                    ) : (
+                      <Eye size={20} className="stroke-current" />
+                    )}
+                  </div>
+                </div>
                 {formik.touched.password && formik.errors.password && (
                   <div className="text-red-500 text-xs md:text-sm">
                     {formik.errors.password}
@@ -123,20 +139,8 @@ const LoginForm = () => {
               </div>
             </div>
           </div>
-
           {/* Remember Me & Forgot Password */}
-          <div className="flex flex-row flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded "
-              />
-              <label htmlFor="remember-me" className="text-sm  text-gray-700">
-                Remember me
-              </label>
-            </div>
+          <div className="flex flex-row flex-wrap items-center justify-end gap-3">
             <a
               href="#"
               className="text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
@@ -144,25 +148,15 @@ const LoginForm = () => {
               Forgot password?
             </a>
           </div>
-
-          {/* Sign In Button */}
           <button
             type="submit"
             disabled={formik.isSubmitting || !formik.isValid}
-            className={`
-          w-full px-4 py-3 md:py-4 text-base font-medium text-white rounded-xl 
-          transition-all duration-200 shadow-sm hover:shadow-md 
-          focus:outline-none focus:ring-2 focus:ring-offset-2
-          ${
-            formik.isSubmitting || !formik.isValid
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700 focus:ring-blue-500"
-          }
-        `}
+            className={`!bg-blue-500
+    w-full px-4 py-3 md:py-4 text-base font-medium text-white rounded-xl 
+    transition-all duration-200 shadow-sm hover:shadow-md`}
           >
             {formik.isSubmitting ? "Signing in..." : "Sign in"}
           </button>
-
           {/* Sign Up Link */}
           <div className="flex justify-center items-center">
             <p className="text-sm md:text-base text-gray-600">
