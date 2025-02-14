@@ -46,7 +46,7 @@ npm run preview
 yarn preview
 ```
 
-
+**Note:** For testing purposes, you can log in with any username and password combination. The authentication is currently in demo mode.
 
 ## Features
 
@@ -83,16 +83,17 @@ yarn preview
 Below are the key screens of the application:
 
 ### Login Page
-![Login Page](/screenshots/login.png)
+![image](https://github.com/user-attachments/assets/916a2cbf-1f02-4e5a-83ff-c30b1fcee06e)
 
 
 ### Dashboard
-![Dashboard](/screenshots/dashboard.png)
+![full page](https://github.com/user-attachments/assets/de434016-31b3-4d2d-8625-604e6497fcdb)
 
 
 ### Invoice Details
-![Invoice Details](/screenshots/invoice-details.png)
+![image](https://github.com/user-attachments/assets/198e9e7f-4bc4-455b-9196-5dcf1caaa46f)
 
 
-### Comments Section
-![Comments](/screenshots/comments.png)
+
+### Dummy data with PDF view
+![screencapture-localhost-5173-dashboard-2025-02-14-11_48_06](https://github.com/user-attachments/assets/f5a1213c-249d-4a81-a4ad-d6801a511fb4)
